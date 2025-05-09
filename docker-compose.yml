@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  # MQTT Broker (Mosquitto)
+  mqtt:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - mqtt-data:/mosquitto/data
+      - mqtt-log:/mosquitto/log
+    restart: unless-stopped
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  # Neo4j
+  neo4j:
+    image: neo4j:latest
+    container_name: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j-data:/data
+      - neo4j-logs:/logs
+    restart: unless-stopped
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_dbms_memory_heap_initial__size=512m
+      - NEO4J_dbms_memory_heap_max__size=1G
+
+  # Main Application
+  app:
+    build: .
+    container_name: mqtt-social-bigdata
+    depends_on:
+      - mqtt
+      - mongodb
+      - neo4j
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./.env:/app/.env
+    restart: unless-stopped
+    environment:
+      - MQTT_BROKER_ADDRESS=mqtt
+      - MONGO_CONN_STRING=mongodb://admin:password@mongodb:27017/
+      - NEO4J_URI=bolt://neo4j:7687
+      - TZ=Europe/Istanbul
+
+volumes:
+  mqtt-data:
+  mqtt-log:
+  mongodb-data:
+  neo4j-data:
+  neo4j-logs:
