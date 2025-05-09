@@ -1,6 +1,13 @@
 # MQTT Social Big Data Analysis
 
-A system that performs big data analysis and storage across different database platforms using MQTT Server and Python. It also includes social media analysis functionality.
+A system that performs big data analysis and storage across different database platforms using MQTT Server and Python. It also includes social media analysis functionality for Twitter and Reddit platforms.
+
+[![GitHub license](https://img.shields.io/github/license/Alierkn/Social-Media-Analysis)](https://github.com/Alierkn/Social-Media-Analysis/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Alierkn/Social-Media-Analysis)](https://github.com/Alierkn/Social-Media-Analysis/stargazers)
+
+## Overview
+
+This project integrates IoT sensor data with social media analysis to provide comprehensive insights. It uses MQTT for real-time data collection, stores data in multiple database types (SQL, MongoDB, Neo4j), and provides analytics capabilities for both sensor data and social media content.
 
 ## Project Structure
 ```
@@ -34,8 +41,8 @@ mqtt-social-bigdata/
 ### Step 1: Clone the Project
 
 ```bash
-git clone https://github.com/username/mqtt-social-bigdata.git
-cd mqtt-social-bigdata
+git clone https://github.com/Alierkn/Social-Media-Analysis.git
+cd Social-Media-Analysis
 ```
 
 ### Step 2: Set Up Python Virtual Environment
@@ -114,3 +121,25 @@ After setting up the project structure, you can enhance the code and particularl
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Author
+
+**Ali Erkan Oca**
+- GitHub: [Alierkn](https://github.com/Alierkn)
+
+## Contribution
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Acknowledgments
+
+- MQTT Protocol for enabling lightweight IoT communication
+- Twitter and Reddit APIs for social media data access
+- Docker and Docker Compose for containerization
+- All the open-source libraries that made this project possible
